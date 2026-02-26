@@ -1,0 +1,1 @@
+export { ImageSlotsManager } from "./ImageSlotsManager";

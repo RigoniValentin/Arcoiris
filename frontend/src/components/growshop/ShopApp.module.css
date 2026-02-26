@@ -1,0 +1,319 @@
+/* Shop App Styles */
+.shopApp {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Shop Navigation Bar (debajo del Navbar principal) */
+.shopNavigation {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 75px; /* Altura aproximada del Navbar principal */
+  z-index: 90;
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ajuste para cuando el navbar principal está en estado scrolled */
+.shopNavigation.scrolled {
+  top: 53px; /* Altura del navbar cuando está scrolled */
+}
+
+.shopNavContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.shopNavLeft {
+  display: flex;
+  align-items: center;
+}
+
+.shopTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  background: linear-gradient(135deg, #CAA135, #A6842B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shopNavButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover {
+  border-color: #CAA135;
+  color: #CAA135;
+  background: rgba(202, 161, 53, 0.05);
+}
+
+.navButton.active {
+  border-color: #CAA135;
+  color: #CAA135;
+  background: rgba(202, 161, 53, 0.1);
+}
+
+.navIcon {
+  font-size: 16px;
+}
+
+.authButtons {
+  display: flex;
+  gap: 12px;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 1px solid #e2e8f0;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #CAA135, #A6842B);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(202, 161, 53, 0.3);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.loginIcon,
+.logoutIcon {
+  font-size: 16px;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+}
+
+/* Main Container para todo el contenido */
+.mainContainer {
+  flex: 1;
+  width: 100%;
+}
+
+/* Contenedor específico para el AdminPanel */
+.adminContainer {
+  width: 100%;
+  min-height: calc(100vh - 134px); /* Altura total - navbar - shop navigation */
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden; /* Eliminar scroll del contenedor principal */
+}
+
+/* Asegúrate de que el AdminPanel tome todo el ancho disponible */
+.adminContainer > div {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Clase para cuando el panel de administración está activo */
+.adminFullWidth {
+  width: 100%;
+}
+
+/* Sobreescribir estilos específicos para la administración */
+.adminFullWidth .adminContainer {
+  width: 100%;
+  max-width: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .shopNavContent {
+    padding: 0 16px;
+    height: 60px;
+  }
+
+  .shopTitle {
+    font-size: 1.1rem;
+  }
+
+  .shopNavButtons {
+    gap: 8px;
+  }
+
+  .navButton {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .navIcon {
+    font-size: 14px;
+  }
+
+  .authButtons {
+    margin-left: 12px;
+    padding-left: 12px;
+  }
+
+  .loginButton,
+  .logoutButton {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .loginIcon,
+  .logoutIcon {
+    font-size: 14px;
+  }
+
+  /* Admin Container responsive para tablets */
+  .adminContainer {
+    min-height: calc(1200vh - 134px);
+    padding: 0 16px 100px 16px; /* Más padding bottom y lateral */
+  }
+
+  .adminContainer > div {
+    width: 100%;
+    max-width: none; /* Permitir full width en tablets */
+  }
+}
+
+/* Botón flotante para acceso admin */
+.adminFloatingButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #A6842B, #7F6520);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+
+.adminFloatingButton:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.5);
+  opacity: 1;
+}
+
+.adminFloatingButton:active {
+  transform: translateY(0) scale(0.95);
+}
+
+@media (max-width: 480px) {
+  .shopNavContent {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .shopNavButtons {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .authButtons {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 12px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .adminFloatingButton {
+    width: 48px;
+    height: 48px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  /* Admin Container responsive para móviles */
+  .adminContainer {
+    min-height: calc(150vh - 80px); /* Ajustar altura para navegación móvil */
+    padding: 0 12px 0 12px; /* Sin padding bottom excesivo */
+    background-color: #f8fafc;
+    height: calc(150vh - 80px); /* Altura fija */
+    overflow: hidden; /* Sin scroll en el contenedor */
+  }
+
+  .adminContainer > div {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Ajustar altura cuando la navegación cambia en móvil */
+  .shopNavigation {
+    position: relative; /* Cambiar a relative en móvil para evitar problemas de altura */
+    top: auto;
+  }
+
+  .mainContent {
+    flex: 1;
+    min-height: calc(100vh - 140px); /* Asegurar altura mínima */
+  }
+}

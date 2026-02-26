@@ -1,0 +1,141 @@
+/* Panel de Administración Premium */
+
+.adminPanel,
+.adminPanelPremium {
+  display: flex;
+  height: calc(100vh - 62px);
+  min-height: 100%;
+  background: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  border-right: 1px solid #e5e7eb;
+}
+
+.navigationMenu {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navigationMenu > .navItem:first-child {
+  margin-top: 100px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  gap: 0.75rem;
+}
+
+.navItem:hover {
+  background: #f3f4f6;
+  color: #374151;
+  transform: translateY(-1px);
+}
+
+.navItem.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.navLabel {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 0;
+  background: #f8fafc;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .adminPanel,
+  .adminPanelPremium {
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    min-height: 60px;
+  }
+
+  .navigationMenu {
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+  }
+
+  .navItem {
+    flex: 1;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .navigationMenu > .navItem:first-child {
+    margin-top: 0px;
+  }
+
+  .mainContent {
+    height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigationMenu {
+    padding: 0.5rem;
+  }
+
+  .navItem {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .navIcon {
+    font-size: 1rem;
+  }
+
+  .navLabel {
+    font-size: 0.875rem;
+  }
+}

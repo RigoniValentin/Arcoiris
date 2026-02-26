@@ -1,0 +1,11 @@
+node_modules
+build
+npm-debug.log
+.env
+.DS_Store
+package-lock.json
+dist
+.vscode
+uploads/products/*
+uploads/slides/*
+!uploads/products/.gitkeep

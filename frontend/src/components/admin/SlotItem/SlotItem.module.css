@@ -1,0 +1,300 @@
+/* SlotItem.module.css */
+
+.slot {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slot:hover {
+  border-color: #059669;
+  background: #f0fdf4;
+}
+
+/* Estados del slot */
+.empty {
+  border-style: dashed;
+  background: #f9fafb;
+}
+
+.occupied {
+  border-style: solid;
+  border-color: #059669;
+  background: #ffffff;
+}
+
+.primary {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.primary:hover {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+}
+
+/* Estados de drag and drop */
+.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+  border-color: #6b7280;
+}
+
+.dragOver {
+  border-color: #3b82f6;
+  background: #dbeafe;
+  transform: scale(1.02);
+}
+
+/* Estado de carga */
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Contenido del slot vacío */
+.emptyContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.uploadIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  color: #6b7280;
+}
+
+.uploadText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.uploadHint {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Contenido del slot con imagen */
+.imageContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Overlay con controles */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.slot:hover .overlay {
+  opacity: 1;
+}
+
+.slotInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slotNumber {
+  background: rgba(255, 255, 255, 0.9);
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.primaryBadge {
+  background: #dc2626;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.replaceButton,
+.deleteButton {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.replaceButton:hover {
+  background: #3b82f6;
+  color: white;
+  transform: scale(1.1);
+}
+
+.deleteButton:hover {
+  background: #dc2626;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Handle de arrastre */
+.dragHandle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: grab;
+}
+
+.slot:hover .dragHandle {
+  opacity: 1;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+/* Overlay de carga */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #059669;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Zona de drop */
+.dropZone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(59, 130, 246, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.dropText {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slot {
+    height: 150px;
+  }
+
+  .uploadIcon {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .uploadText {
+    font-size: 14px;
+  }
+
+  .uploadHint {
+    font-size: 12px;
+  }
+
+  .controls {
+    gap: 4px;
+  }
+
+  .replaceButton,
+  .deleteButton {
+    padding: 6px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slot {
+    height: 120px;
+  }
+
+  .uploadIcon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .uploadText {
+    font-size: 12px;
+  }
+
+  .uploadHint {
+    font-size: 10px;
+  }
+}
