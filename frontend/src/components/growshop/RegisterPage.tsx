@@ -338,10 +338,10 @@ const RegisterPage: React.FC = () => {
                   ¿Ya tenés cuenta?{" "}
                   <button
                     type="button"
-                    onClick={() => navigate("/shop")}
+                    onClick={() => navigate("/login")}
                     className={styles.loginBtn}
                   >
-                    Ir a la tienda
+                    Iniciar Sesión
                   </button>
                 </p>
               </form>

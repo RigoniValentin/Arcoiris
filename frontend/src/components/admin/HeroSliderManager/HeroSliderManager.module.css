@@ -1,13 +1,13 @@
-/* HeroSliderManager.module.css */
+/* HeroSliderManager — Arcoiris Joyería */
 
 .container {
-  height: calc(100vh - 132px);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
+  background: #f7f7f5;
   overflow: hidden;
-  padding: 1.5rem;
-  margin-top: 60px;
+  padding: 0;
+  margin-top: 0;
 }
 
 .contentWrapper {
@@ -21,18 +21,18 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
   margin-bottom: 20px;
 }
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0E4E4E 0%, #1a6b6b 100%);
   border-radius: 12px;
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 4px 12px rgba(14, 78, 78, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,12 +42,14 @@
 
 .title h3 {
   margin: 0 0 4px 0;
+  font-family: 'Playfair Display', serif;
   font-size: 20px;
   font-weight: 700;
   color: white;
 }
 
 .summary {
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
@@ -84,12 +86,12 @@
 
 .addButton {
   background: #CAA135;
-  border-color: #059669;
+  border-color: #b8912e;
   color: white;
 }
 
 .addButton:hover {
-  background: #059669;
+  background: #b8912e;
 }
 
 .closeButton {
@@ -159,9 +161,10 @@
 
 .formContainer h4 {
   margin: 0 0 16px 0;
+  font-family: 'Playfair Display', serif;
   font-size: 18px;
   font-weight: 600;
-  color: #111827;
+  color: #0E4E4E;
 }
 
 .formGroup {
@@ -188,8 +191,8 @@
 
 .formGroup input[type="text"]:focus {
   outline: none;
-  border-color: #CAA135;
-  box-shadow: 0 0 0 3px rgba(202, 161, 53, 0.1);
+  border-color: #0E4E4E;
+  box-shadow: 0 0 0 3px rgba(14, 78, 78, 0.1);
 }
 
 .checkboxLabel {
@@ -235,13 +238,13 @@
 }
 
 .dropZone:hover {
-  border-color: #CAA135;
-  background: #f0fdf4;
+  border-color: #0E4E4E;
+  background: rgba(14, 78, 78, 0.03);
 }
 
 .dropZone.dragActive {
-  border-color: #CAA135;
-  background: #d1fae5;
+  border-color: #0E4E4E;
+  background: rgba(14, 78, 78, 0.06);
   border-width: 3px;
 }
 
@@ -330,11 +333,11 @@
   gap: 8px;
   margin-top: 12px;
   padding: 10px 14px;
-  background: #d1fae5;
-  border: 1px solid #CAA135;
+  background: rgba(14, 78, 78, 0.06);
+  border: 1px solid rgba(14, 78, 78, 0.15);
   border-radius: 8px;
   font-size: 13px;
-  color: #059669;
+  color: #0E4E4E;
   font-weight: 500;
 }
 
@@ -343,7 +346,7 @@
 }
 
 .compressionRatio {
-  background: #CAA135;
+  background: #0E4E4E;
   color: white;
   padding: 2px 8px;
   border-radius: 4px;
@@ -377,7 +380,7 @@
 
 .urlAlternative input:focus {
   outline: none;
-  border-color: #CAA135;
+  border-color: #0E4E4E;
 }
 
 .urlAlternative input:disabled {
@@ -409,13 +412,13 @@
 }
 
 .saveButton {
-  background: #CAA135;
-  border: 1px solid #059669;
+  background: #0E4E4E;
+  border: 1px solid #0E4E4E;
   color: white;
 }
 
 .saveButton:hover:not(:disabled) {
-  background: #059669;
+  background: #1a6b6b;
 }
 
 .saveButton:disabled {
@@ -562,7 +565,7 @@
   margin: 0 0 4px 0;
   font-size: 16px;
   font-weight: 600;
-  color: #111827;
+  color: #0E4E4E;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -586,8 +589,8 @@
 }
 
 .statusBadge.active {
-  background: #d1fae5;
-  color: #059669;
+  background: rgba(14, 78, 78, 0.08);
+  color: #0E4E4E;
 }
 
 .statusBadge.inactive {
@@ -614,13 +617,13 @@
 }
 
 .editButton:hover {
-  background: #dbeafe;
-  border-color: #3b82f6;
+  background: rgba(14, 78, 78, 0.1);
+  border-color: #0E4E4E;
 }
 
 .toggleButton:hover {
-  background: #fef3c7;
-  border-color: #f59e0b;
+  background: rgba(202, 161, 53, 0.1);
+  border-color: #CAA135;
 }
 
 .deleteButton:hover {
@@ -673,9 +676,9 @@
 /* Responsive para el contenedor principal */
 @media (max-width: 1024px) {
   .container {
-    height: calc(100vh - 60px);
+    height: 100%;
     margin-top: 0;
-    padding: 1rem;
+    padding: 0.75rem;
   }
 }
 

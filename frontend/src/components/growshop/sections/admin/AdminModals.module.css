@@ -1,4 +1,4 @@
-/* Modales Premium - Estilos de último nivel */
+/* Modales — Arcoiris Joyería */
 
 .modalOverlay {
   position: fixed;
@@ -40,7 +40,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0E4E4E 0%, #1a6b6b 100%);
   color: white;
   position: relative;
   flex-shrink: 0;
@@ -62,6 +62,7 @@
 }
 
 .modalTitle {
+  font-family: 'Playfair Display', serif;
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0;
@@ -97,7 +98,7 @@
   padding: 2rem;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #f8fafc;
+  background: #f7f7f5;
   min-height: 0;
 }
 
@@ -159,6 +160,7 @@
 
 .label {
   display: block;
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   color: #374151;
@@ -177,9 +179,9 @@
 
 .input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #0E4E4E;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(14, 78, 78, 0.1);
 }
 
 .textarea {
@@ -196,9 +198,9 @@
 
 .textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #0E4E4E;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(14, 78, 78, 0.1);
 }
 
 .select {
@@ -214,9 +216,9 @@
 
 .select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #0E4E4E;
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(14, 78, 78, 0.1);
 }
 
 .arrayItem {
@@ -246,9 +248,9 @@
 }
 
 .addButton {
-  background: #e0f2fe;
-  border: 1px solid #b3e5fc;
-  color: #0277bd;
+  background: rgba(14, 78, 78, 0.08);
+  border: 1px solid rgba(14, 78, 78, 0.15);
+  color: #0E4E4E;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   cursor: pointer;
@@ -258,7 +260,7 @@
 }
 
 .addButton:hover {
-  background: #b3e5fc;
+  background: rgba(14, 78, 78, 0.15);
   transform: translateY(-1px);
 }
 
@@ -323,7 +325,7 @@
 .checkbox {
   width: 1.25rem;
   height: 1.25rem;
-  accent-color: #667eea;
+  accent-color: #0E4E4E;
   cursor: pointer;
 }
 
@@ -349,8 +351,8 @@
 }
 
 .colorOption.selected {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  border-color: #0E4E4E;
+  box-shadow: 0 0 0 3px rgba(14, 78, 78, 0.2);
 }
 
 .modalFooter {
@@ -365,12 +367,13 @@
 }
 
 .cancelButton {
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
+  background: #f7f7f5;
+  border: 2px solid #e5e7eb;
   color: #64748b;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -382,21 +385,22 @@
 }
 
 .saveButton {
-  background: linear-gradient(135deg, #CAA135 0%, #059669 100%);
+  background: linear-gradient(135deg, #0E4E4E 0%, #1a6b6b 100%);
   border: none;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(202, 161, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(14, 78, 78, 0.3);
 }
 
 .saveButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(202, 161, 53, 0.4);
+  box-shadow: 0 8px 20px rgba(14, 78, 78, 0.4);
 }
 
 /* Responsive */
@@ -535,9 +539,9 @@
 }
 
 .tag {
-  background: #e0f2fe;
-  border: 1px solid #b3e5fc;
-  color: #0277bd;
+  background: rgba(14, 78, 78, 0.08);
+  border: 1px solid rgba(14, 78, 78, 0.15);
+  color: #0E4E4E;
   padding: 0.25rem 0.5rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -576,7 +580,7 @@
 
 .notificationSuccess {
   border-left: 4px solid #CAA135;
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  background: linear-gradient(135deg, #fafaf8 0%, #f7f7f5 100%);
 }
 
 .notificationError {
@@ -597,7 +601,7 @@
 }
 
 .notificationSuccess .notificationMessage {
-  color: #065f46;
+  color: #0E4E4E;
 }
 
 .notificationError .notificationMessage {
@@ -735,7 +739,7 @@
 }
 
 .productPrice {
-  color: #059669;
+  color: #CAA135;
   font-weight: 600;
   margin: 0;
 }
@@ -763,7 +767,7 @@
 }
 
 .notificationSuccess {
-  background: linear-gradient(135deg, #CAA135 0%, #059669 100%);
+  background: linear-gradient(135deg, #0E4E4E 0%, #1a6b6b 100%);
   color: white;
 }
 

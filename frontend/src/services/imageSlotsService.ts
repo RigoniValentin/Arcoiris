@@ -6,6 +6,19 @@ import {
 } from "../types/imageSlots";
 import { API_BASE_URL } from "../config/api";
 
+// Helper para extraer mensaje de error del backend
+async function extractErrorMessage(
+  response: Response,
+  fallback: string,
+): Promise<string> {
+  try {
+    const body = await response.json();
+    return body.message || body.error || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 class ImageSlotsService {
   private baseUrl = `${API_BASE_URL}/products`;
 
@@ -19,7 +32,11 @@ class ImageSlotsService {
         if (response.status === 404) {
           throw new Error("ENDPOINT_NOT_IMPLEMENTED");
         }
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const msg = await extractErrorMessage(
+          response,
+          `HTTP error! status: ${response.status}`,
+        );
+        throw new Error(msg);
       }
 
       // Verificar si la respuesta es JSON válido
@@ -63,7 +80,11 @@ class ImageSlotsService {
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const msg = await extractErrorMessage(
+          response,
+          `Error al actualizar imagen (status: ${response.status})`,
+        );
+        throw new Error(msg);
       }
 
       const data = await response.json();
@@ -88,7 +109,11 @@ class ImageSlotsService {
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const msg = await extractErrorMessage(
+          response,
+          `Error al eliminar imagen (status: ${response.status})`,
+        );
+        throw new Error(msg);
       }
 
       const data = await response.json();
@@ -121,7 +146,11 @@ class ImageSlotsService {
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const msg = await extractErrorMessage(
+          response,
+          `Error al reordenar imágenes (status: ${response.status})`,
+        );
+        throw new Error(msg);
       }
 
       const data = await response.json();
@@ -146,7 +175,11 @@ class ImageSlotsService {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const msg = await extractErrorMessage(
+          response,
+          `Error al subir imágenes (status: ${response.status})`,
+        );
+        throw new Error(msg);
       }
 
       const data = await response.json();

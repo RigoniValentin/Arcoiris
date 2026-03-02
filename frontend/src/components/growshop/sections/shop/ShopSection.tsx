@@ -1312,7 +1312,7 @@ const ShopSection: React.FC = () => {
           </motion.button>
         </div>
 
-        {/* Search and Filters */}
+        {/* Search and Filters — Arcoiris Design */}
         <section id="shop-search-section" className={styles.searchSection}>
           <div
             id="shop-search-wrapper"
@@ -1320,96 +1320,143 @@ const ShopSection: React.FC = () => {
             style={{ top: stickyOffset }}
           >
             <div className={styles.searchContainer}>
-              <div className={styles.searchBar}>
-                <svg
-                  className={styles.searchIcon}
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.35-4.35"></path>
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Buscar joyas, anillos, collares, pulseras..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      scrollToProducts();
-                    }
-                  }}
-                  className={styles.searchInput}
-                />
-              </div>
-
-              <div className={styles.filterRow}>
-                <div></div>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className={styles.sortSelect}
-                  defaultValue="name"
-                >
-                  <option value="name">📝 Nombre A-Z</option>
-                  <option value="featured">🏆 Destacados</option>
-                  <option value="price">💰 Precio ↑</option>
-                  <option value="rating">⭐ Mejor valorados</option>
-                </select>
-
-                <button
-                  onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className={styles.filterToggle}
-                >
+              {/* Barra principal: búsqueda + ordenar + filtros en una línea */}
+              <div className={styles.searchRow}>
+                <div className={styles.searchBar}>
                   <svg
-                    width="20"
-                    height="20"
+                    className={styles.searchIcon}
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                   >
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
                   </svg>
-                  Filtros Avanzados
-                </button>
+                  <input
+                    type="text"
+                    placeholder="Buscar joyas, anillos, collares..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        scrollToProducts();
+                      }
+                    }}
+                    className={styles.searchInput}
+                  />
+                  {searchTerm && (
+                    <button
+                      className={styles.searchClear}
+                      onClick={() => setSearchTerm("")}
+                      aria-label="Limpiar búsqueda"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  )}
+                </div>
+
+                <div className={styles.filterActions}>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className={styles.sortSelect}
+                  >
+                    <option value="name">Nombre A-Z</option>
+                    <option value="featured">Destacados</option>
+                    <option value="price">Precio ↑</option>
+                    <option value="rating">Mejor valorados</option>
+                  </select>
+
+                  <button
+                    onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                    className={`${styles.filterToggle} ${showAdvancedFilters ? styles.filterToggleActive : ""}`}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <line x1="4" y1="6" x2="20" y2="6"></line>
+                      <line x1="8" y1="12" x2="20" y2="12"></line>
+                      <line x1="12" y1="18" x2="20" y2="18"></line>
+                      <circle cx="6" cy="12" r="2"></circle>
+                      <circle cx="10" cy="18" r="2"></circle>
+                    </svg>
+                    <span className={styles.filterToggleLabel}>Filtros</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Advanced Filters */}
+              {/* Panel de filtros avanzados */}
               {showAdvancedFilters && (
                 <div className={styles.advancedFilters}>
                   <div className={styles.filterGroup}>
                     <label className={styles.filterLabel}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2v20M2 12h20"></path>
+                      </svg>
                       Rango de precios
                     </label>
                     <div className={styles.priceRange}>
-                      <input
-                        type="range"
-                        min="0"
-                        max="2000000"
-                        value={priceRange[0]}
-                        onChange={(e) =>
-                          setPriceRange([Number(e.target.value), priceRange[1]])
-                        }
-                        className={styles.rangeSlider}
-                      />
-                      <input
-                        type="range"
-                        min="0"
-                        max="2000000"
-                        value={priceRange[1]}
-                        onChange={(e) =>
-                          setPriceRange([priceRange[0], Number(e.target.value)])
-                        }
-                        className={styles.rangeSlider}
-                      />
-                      <div className={styles.rangeValues}>
-                        <span>{formatPrice(priceRange[0])}</span>
-                        <span>{formatPrice(priceRange[1])}</span>
+                      <div className={styles.priceInputRow}>
+                        <div className={styles.priceInputWrap}>
+                          <span className={styles.pricePrefix}>$</span>
+                          <input
+                            type="number"
+                            min="0"
+                            max="2000000"
+                            value={priceRange[0]}
+                            onChange={(e) =>
+                              setPriceRange([Number(e.target.value), priceRange[1]])
+                            }
+                            className={styles.priceInput}
+                          />
+                        </div>
+                        <span className={styles.priceSeparator}>—</span>
+                        <div className={styles.priceInputWrap}>
+                          <span className={styles.pricePrefix}>$</span>
+                          <input
+                            type="number"
+                            min="0"
+                            max="2000000"
+                            value={priceRange[1]}
+                            onChange={(e) =>
+                              setPriceRange([priceRange[0], Number(e.target.value)])
+                            }
+                            className={styles.priceInput}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.rangeTrack}>
+                        <input
+                          type="range"
+                          min="0"
+                          max="2000000"
+                          value={priceRange[0]}
+                          onChange={(e) =>
+                            setPriceRange([Number(e.target.value), priceRange[1]])
+                          }
+                          className={styles.rangeSlider}
+                        />
+                        <input
+                          type="range"
+                          min="0"
+                          max="2000000"
+                          value={priceRange[1]}
+                          onChange={(e) =>
+                            setPriceRange([priceRange[0], Number(e.target.value)])
+                          }
+                          className={styles.rangeSlider}
+                        />
                       </div>
                     </div>
                   </div>
@@ -1536,7 +1583,7 @@ const ShopSection: React.FC = () => {
                 <article
                   key={product.id || product._id}
                   className={`${styles.productCard} ${product.featured ? styles.featured : ""}`}
-                  onClick={() => openProductModal(product)}
+                  onClick={() => window.open(`/producto/${product._id || product.id}`, '_blank')}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className={styles.productImageContainer}>
@@ -2510,7 +2557,7 @@ const ShopSection: React.FC = () => {
               </svg>
               <input
                 type="text"
-                placeholder="Buscar joyas, anillos, collares, pulseras..."
+                placeholder="Buscar joyas, anillos, collares..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => {
@@ -2520,6 +2567,18 @@ const ShopSection: React.FC = () => {
                 }}
                 className={styles.floatingSearchInput}
               />
+              {searchTerm && (
+                <button
+                  className={styles.floatingSearchClear}
+                  onClick={() => setSearchTerm("")}
+                  aria-label="Limpiar búsqueda"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -8,7 +8,9 @@ import {
 import { useProductMutations } from "../../../../hooks/useProducts";
 import { useCategoryMutations } from "../../../../hooks/useCategories";
 import { productService } from "../../../../services/productService";
+import { imageSlotsService } from "../../../../services/imageSlotsService";
 import { ImageSlotsManager } from "../../../admin/ImageSlotsManager";
+import { LocalSlotsPreview } from "../../../admin/LocalSlotsPreview";
 import styles from "./AdminModals.module.css";
 
 interface AdminModalsPremiumProps {
@@ -93,6 +95,7 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
 
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [pendingSlotFiles, setPendingSlotFiles] = useState<Map<number, File>>(new Map());
   const [tagInput, setTagInput] = useState("");
   const [specKey, setSpecKey] = useState("");
   const [specValue, setSpecValue] = useState("");
@@ -312,6 +315,7 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
       });
       setImageFiles([]);
       setImagePreviews([]);
+      setPendingSlotFiles(new Map());
     }
   }, [type, product]);
 
@@ -549,7 +553,11 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
               );
             }
 
-            return user.token;
+            // El token se almacena por separado en "authToken"
+            const token = localStorage.getItem("authToken");
+            if (token) {
+              return token;
+            }
           }
         } catch (error) {
           console.error("Error getting user token:", error);
@@ -590,7 +598,30 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
           `✅ Producto "${productData.name}" actualizado exitosamente`,
         );
       } else if (type === "add-product") {
-        await createProduct(productData, imageFiles, authToken);
+        // Crear producto primero (sin imágenes de slots)
+        const filesToUpload = pendingSlotFiles.size === 0 ? imageFiles : undefined;
+        const newProduct = await createProduct(productData, filesToUpload, authToken);
+
+        // Si hay archivos pendientes del sistema de slots, subirlos al producto creado
+        if (newProduct && pendingSlotFiles.size > 0) {
+          const productId = String(newProduct._id || newProduct.id || "");
+          if (productId) {
+            showSuccessMessage("📸 Subiendo imágenes a los slots...");
+            // Ordenar por número de slot para subir en orden
+            const sortedEntries = Array.from(pendingSlotFiles.entries()).sort(
+              ([a], [b]) => a - b,
+            );
+            for (const [slotNumber, file] of sortedEntries) {
+              try {
+                await imageSlotsService.updateSlot(productId, slotNumber, file);
+                console.log(`✅ Slot ${slotNumber} uploaded successfully`);
+              } catch (slotError) {
+                console.error(`❌ Error uploading slot ${slotNumber}:`, slotError);
+              }
+            }
+          }
+        }
+
         showSuccessMessage(
           `🎉 Producto "${productData.name}" creado exitosamente`,
         );
@@ -664,7 +695,11 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
               );
             }
 
-            return user.token;
+            // El token se almacena por separado en "authToken"
+            const token = localStorage.getItem("authToken");
+            if (token) {
+              return token;
+            }
           }
         } catch (error) {
           console.error("Error getting user token:", error);
@@ -771,7 +806,11 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
               );
             }
 
-            return user.token;
+            // El token se almacena por separado en "authToken"
+            const token = localStorage.getItem("authToken");
+            if (token) {
+              return token;
+            }
           }
         } catch (error) {
           console.error("Error getting user token:", error);
@@ -860,7 +899,11 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
               );
             }
 
-            return user.token;
+            // El token se almacena por separado en "authToken"
+            const token = localStorage.getItem("authToken");
+            if (token) {
+              return token;
+            }
           }
         } catch (error) {
           console.error("Error getting user token:", error);
@@ -1223,21 +1266,23 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
             Gestión de Imágenes del Producto
           </label>
 
-          {/* Toggle para elegir entre sistema nuevo y viejo */}
-          <div className={styles.systemToggle}>
-            <label className={styles.toggleLabel}>
-              <input
-                type="checkbox"
-                checked={useSlotSystem}
-                onChange={(e) => setUseSlotSystem(e.target.checked)}
-                className={styles.checkbox}
-              />
-              Usar sistema avanzado de slots (recomendado)
-            </label>
-          </div>
+          {/* Toggle para elegir entre sistema nuevo y viejo - solo en edición */}
+          {type === "edit-product" && (
+            <div className={styles.systemToggle}>
+              <label className={styles.toggleLabel}>
+                <input
+                  type="checkbox"
+                  checked={useSlotSystem}
+                  onChange={(e) => setUseSlotSystem(e.target.checked)}
+                  className={styles.checkbox}
+                />
+                Usar sistema avanzado de slots (recomendado)
+              </label>
+            </div>
+          )}
 
-          {useSlotSystem ? (
-            // Nuevo sistema de slots
+          {type === "add-product" || useSlotSystem ? (
+            // Sistema de slots (obligatorio para nuevos productos)
             <div className={styles.slotsContainer}>
               {product && (product._id || product.id) ? (
                 <ImageSlotsManager
@@ -1254,23 +1299,15 @@ export const AdminModalsPremium: React.FC<AdminModalsPremiumProps> = ({
                   }}
                 />
               ) : (
-                <div className={styles.slotSystemInfo}>
-                  <div className={styles.infoIcon}>💡</div>
-                  <div className={styles.infoText}>
-                    <strong>
-                      Sistema de slots disponible después de crear el producto
-                    </strong>
-                    <p>
-                      Una vez que guardes el producto, podrás usar el sistema
-                      avanzado de gestión de imágenes con 6 slots individuales,
-                      drag & drop y control granular.
-                    </p>
-                  </div>
-                </div>
+                <LocalSlotsPreview
+                  onFilesChange={(files) => {
+                    setPendingSlotFiles(files);
+                  }}
+                />
               )}
             </div>
           ) : (
-            // Sistema tradicional de imágenes
+            // Sistema tradicional de imágenes (solo disponible en edición)
             <div className={styles.traditionalImageSystem}>
               <label className={styles.subLabel}>
                 Imágenes del Producto (máximo 6)

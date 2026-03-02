@@ -31,10 +31,10 @@ export interface HeroSlideResponse {
 // Helper para obtener el token del usuario logueado
 const getAuthToken = (): string | null => {
   try {
-    const userData = localStorage.getItem("userData");
-    if (userData) {
-      const user = JSON.parse(userData);
-      return user.token || null;
+    // El token se almacena por separado en "authToken"
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      return token;
     }
   } catch (error) {
     console.error("Error getting auth token:", error);

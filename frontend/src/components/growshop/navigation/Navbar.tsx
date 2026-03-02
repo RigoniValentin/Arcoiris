@@ -85,16 +85,21 @@ const Navbar: React.FC = () => {
                   {currentUser.name}
                 </span>
                 {currentUser.isAdmin && (
-                  <span className={styles.adminBadge}>Admin</span>
+                  <Link to="/admin" className={styles.adminBadge}>Admin</Link>
                 )}
                 <button onClick={handleLogout} className={styles.logoutBtn}>
                   Salir
                 </button>
               </div>
             ) : (
-              <Link to="/registro" className={styles.registerBtn}>
-                Crear Cuenta
-              </Link>
+              <>
+                <Link to="/login" className={styles.loginBtn}>
+                  Iniciar Sesión
+                </Link>
+                <Link to="/registro" className={styles.registerBtn}>
+                  Crear Cuenta
+                </Link>
+              </>
             )}
           </div>
 
@@ -163,20 +168,29 @@ const Navbar: React.FC = () => {
                   <>
                     <div className={styles.mobileUser}>
                       <span>{currentUser.name} {currentUser.lastname}</span>
-                      {currentUser.isAdmin && <span className={styles.adminBadge}>Admin</span>}
+                      {currentUser.isAdmin && <Link to="/admin" className={styles.adminBadge} onClick={() => setIsMobileMenuOpen(false)}>Admin</Link>}
                     </div>
                     <button onClick={handleLogout} className={styles.mobileLogout}>
                       Cerrar Sesión
                     </button>
                   </>
                 ) : (
-                  <Link
-                    to="/registro"
-                    className={styles.mobileRegisterBtn}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Crear Cuenta
-                  </Link>
+                  <>
+                    <Link
+                      to="/login"
+                      className={styles.mobileLoginBtn}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Iniciar Sesión
+                    </Link>
+                    <Link
+                      to="/registro"
+                      className={styles.mobileRegisterBtn}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Crear Cuenta
+                    </Link>
+                  </>
                 )}
               </div>
             </motion.nav>
